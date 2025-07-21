@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Copy, Check, Play, Terminal } from 'lucide-react'
+import { Copy, Check, Play } from 'lucide-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { useTheme } from '@/hooks/useTheme'
+import { useTheme } from '@/components/providers/ThemeProvider'
 
 interface CodePreviewProps {
   code: string

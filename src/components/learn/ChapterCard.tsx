@@ -16,7 +16,7 @@ const difficultyColors = {
 }
 
 export function ChapterCard({ chapter, onLessonSelect }: ChapterCardProps) {
-  const completedLessons = 3 // Mock data - would come from user progress
+  const completedLessons = 1 // Mock data - would come from user progress
   const totalLessons = chapter.lessons.length
   const progressPercentage = (completedLessons / totalLessons) * 100
 

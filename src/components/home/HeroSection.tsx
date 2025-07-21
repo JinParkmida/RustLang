@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Play, Star } from 'lucide-react'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/useAuth'
 import { CodePreview } from '@/components/ui/CodePreview'
 
 const rustCode = `fn main() {
@@ -21,8 +20,6 @@ const rustCode = `fn main() {
 }`
 
 export function HeroSection() {
-  const { user } = useAuth()
-
   return (
     <section className="relative overflow-hidden py-20 lg:py-32">
       {/* Background decoration */}
@@ -63,27 +60,25 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href={user ? "/dashboard" : "/auth/signup"}>
+              <Link href="/learn">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center gap-2 bg-rust-600 hover:bg-rust-700 text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 shadow-lg hover:shadow-xl"
                 >
-                  {user ? 'Continue Learning' : 'Start Learning Free'}
+                  Start Learning Free
                   <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </Link>
 
-              <Link href="/demo">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 bg-white dark:bg-dark-800 hover:bg-gray-50 dark:hover:bg-dark-700 text-gray-900 dark:text-white font-semibold px-8 py-4 rounded-xl border border-gray-200 dark:border-dark-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
-                >
-                  <Play className="w-5 h-5" />
-                  Try Demo
-                </motion.button>
-              </Link>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 bg-white dark:bg-dark-800 hover:bg-gray-50 dark:hover:bg-dark-700 text-gray-900 dark:text-white font-semibold px-8 py-4 rounded-xl border border-gray-200 dark:border-dark-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
+              >
+                <Play className="w-5 h-5" />
+                Try Demo
+              </motion.button>
             </div>
 
             <motion.div

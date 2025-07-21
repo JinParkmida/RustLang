@@ -2,11 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ChevronLeft, ChevronRight, Play, Check } from 'lucide-react'
-import { CodeEditor } from '@/components/ui/CodeEditor'
+import { X, Play, Check } from 'lucide-react'
 import { CodePreview } from '@/components/ui/CodePreview'
 import { chapters } from '@/data/curriculum'
-import { Lesson } from '@/types/curriculum'
 
 interface LessonModalProps {
   lessonId: string
@@ -101,18 +99,6 @@ export function LessonModal({ lessonId, onClose }: LessonModalProps) {
                 Exercise
               </button>
             )}
-            {lesson.quiz && (
-              <button
-                onClick={() => setCurrentTab('quiz')}
-                className={`px-6 py-3 font-medium text-sm transition-colors ${
-                  currentTab === 'quiz'
-                    ? 'text-rust-600 dark:text-rust-400 border-b-2 border-rust-600 dark:border-rust-400'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-                }`}
-              >
-                Quiz
-              </button>
-            )}
           </div>
 
           {/* Content */}
@@ -120,7 +106,7 @@ export function LessonModal({ lessonId, onClose }: LessonModalProps) {
             {currentTab === 'content' && (
               <div className="h-full overflow-y-auto p-6">
                 <div className="prose dark:prose-invert max-w-none">
-                  <div dangerouslySetInnerHTML={{ __html: lesson.content }} />
+                  <div dangerouslySetInnerHTML={{ __html: lesson.content.replace(/\n/g, '<br>') }} />
                 </div>
                 
                 {lesson.codeExamples.map((example) => (
@@ -192,11 +178,12 @@ export function LessonModal({ lessonId, onClose }: LessonModalProps) {
                       Run Code
                     </button>
                   </div>
-                  <div className="flex-1">
-                    <CodeEditor
+                  <div className="flex-1 p-4">
+                    <textarea
                       value={userCode}
-                      onChange={setUserCode}
-                      language="rust"
+                      onChange={(e) => setUserCode(e.target.value)}
+                      className="w-full h-full bg-gray-50 dark:bg-dark-700 border border-gray-200 dark:border-dark-600 rounded-lg p-4 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-rust-500"
+                      placeholder="Write your Rust code here..."
                     />
                   </div>
                 </div>
